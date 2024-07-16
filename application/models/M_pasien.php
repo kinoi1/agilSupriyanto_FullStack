@@ -21,7 +21,7 @@ class M_pasien extends CI_Model {
  public function list_data(){
     $this->db->select("
     b.nama,b.alamat,a.Antrian,
-    a.Status,a.PasienID
+    a.Status,a.PasienID,a.keluhan
     ");
     $this->db->from("ps_pasien as a");
     $this->db->join("ut_user as b","a.UserID = b.UserID","left");
@@ -49,6 +49,15 @@ class M_pasien extends CI_Model {
  public function update($id,$data){
     $this->db->where('PasienID',$id);
     if($this->db->update('ps_pasien', $data)):
+        return TRUE;
+    else:
+        return FALSE;
+    endif;
+ }
+
+ public function delete($id){
+    $this->db->where('PasienID',$id);
+    if($this->db->delete('ps_pasien')):
         return TRUE;
     else:
         return FALSE;

@@ -36,7 +36,7 @@ class M_main extends CI_Model {
             return '<span class="badge badge-primary">Belum Diperiksa</span>';
         elseif($status == 1):
             return '<span class="badge badge-info">Sedang Diperiksa</span>';
-        else:
+        elseif($status == 2):
             return '<span class="badge badge-success">Selesai Diperiksa</span>';
         endif;
     }

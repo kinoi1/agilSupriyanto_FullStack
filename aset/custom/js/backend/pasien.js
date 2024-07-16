@@ -3,6 +3,8 @@ var url_list    = host + 'rumahsakit/api/list_pasien';
 var url_simpan  = host + 'rumahsakit/pasien/save';
 var url_update  = host + 'rumahsakit/pasien/update';
 var url_edit    = host + 'rumahsakit/pasien/edit';
+var url_hapus  = host + 'rumahsakit/pasien/hapus/';
+
 
 
 $(document).ready(function () {
@@ -71,7 +73,11 @@ function getlist() {
 }
 
 function save(element){
-    console.log(element);
+  
+    $('[name="UserID"]').prop('disabled', false);
+    $('[name="DokterID"]').prop('disabled', false);
+    $('[name="keluhan"]').prop('readonly', false);
+    
     var category = $(element).data('category');
     if(category == 'edit'){
         url = url_update;
@@ -96,7 +102,13 @@ function save(element){
                     $('#exampleModal').modal('hide');
 
                 }
-                swal(data.Message,'', "success");
+                swal({
+                    title: "Info",
+                    text: "Data berhasil disimpan",
+                    type: "success"
+                },function() {
+                    location.reload(); // Reload halaman setelah swal success ditutup
+                });
             }else{
                 swal(data.Message,'', "warning");
 
@@ -163,7 +175,7 @@ function getdata(type){
 }
 
 function edit(id){
-    console.log('tes');
+    akses = $('#editbtn').data('hakaksesid');
     $.ajax({
         url : url_edit,
         type: "POST",
@@ -171,15 +183,20 @@ function edit(id){
         dataType: "JSON",
         success: function(data)
         {
-           console.log(data);
            pasien = data.pasien;
-           console.log(pasien);
            $('[name="UserID"]').val(pasien.UserID);
            $('[name="DokterID"]').val(pasien.DokterID);
            $('[name="keluhan"]').val(pasien.keluhan);
            $('[name="name"]').val(pasien.nama);
            $('[name="dokter"]').val(pasien.nama_dokter);
            $('[name="PasienID"]').val(pasien.PasienID);
+           $('[name="status"]').val(pasien.status);
+
+           if (akses === 3) {
+                $('[name="UserID"]').prop('disabled', true);
+                $('[name="DokterID"]').prop('disabled', true);
+                $('[name="keluhan"]').prop('readonly', true);
+            }
         //    $('#dokter').val(pasien.nama_dokter);
         //    console.log(pasien.nama_dokter);
         //    $('#dokter').val('ijfojfo');
@@ -212,12 +229,18 @@ function hapus_data(id){
         function (isConfirm) {
             if (isConfirm) {
                 $.ajax({
-                    url: url_hapus + id + "/nonactive",
+                    url: url_hapus + id ,
                     type: "POST",
                     dataType: "JSON",
                     success: function (data) {
                        
-                        swal("Info", "Transaksi berhasil dibatalkan");
+                        swal({
+                            title: "Info",
+                            text: "Data berhasil dibatalkan",
+                            type: "success"
+                        }, function() {
+                            location.reload(); // Reload halaman setelah swal success ditutup
+                        });
 
                         
 

@@ -75,6 +75,16 @@
                 <label for="keluhan">Keluhan</label>
                 <textarea  class="form-control" name="keluhan" rows="3"></textarea>
             </div>
+
+            <div class="col-md-6 form-group">
+                <label for="status"> Status</label>
+                <select class="form-control" name="status" >
+                    <option value="0"><span class="badge badge-primary">Belum Diperiksa</span></option>
+                    <option value="1"><span class="badge badge-info">Sedang Diperiksa</span></option>
+                    <option value="2"><span class="badge badge-success">Selesai Diperiksa</span></option>
+                </select>
+            </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <a href="javascript:void(0)" onclick="save(this)" data-category="edit" class="btn btn-primary">Save changes</a>

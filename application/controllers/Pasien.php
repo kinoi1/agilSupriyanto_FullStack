@@ -6,6 +6,7 @@ class Pasien extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('M_pasien','pasien');
+        is_logged_in();
     }
 
     public function index(){
@@ -72,7 +73,8 @@ class Pasien extends CI_Controller {
             'DokterID' => $res->DokterID,
             'keluhan' => $res->keluhan,
             'nama_dokter' => $res->nama_dokter,
-            'nama' => $res->nama
+            'nama' => $res->nama,
+            'status' => $res->Status
 
         );
 
@@ -90,12 +92,14 @@ class Pasien extends CI_Controller {
         $DokterID = $this->input->post('DokterID');
         $keluhan = $this->input->post('keluhan');
         $PasienID = $this->input->post('PasienID');
+        $Status = $this->input->post('status');
 
         // $antrian = $this->main->cek_antrian($DokterID);
         $data = array(
             'UserID' => $UserID,
             'DokterID' => $DokterID,
             'keluhan' => $keluhan,
+            'Status' => $Status
         );
 
         $updateID = $this->pasien->update($PasienID, $data);
@@ -105,6 +109,23 @@ class Pasien extends CI_Controller {
                 'Message' => 'Berhasil update pemeriksaan',
                 
 
+            );
+        else:
+            $output = array(
+                'status' => FALSE,
+                'Message' => 'Gagal mengajukan pemeriksaan',
+            );
+        endif;
+        echo json_encode($output);
+    }
+
+    public function hapus($id){
+
+        $deleteID = $this->pasien->delete($id);
+        if($deleteID):
+            $output = array(
+                'status' => TRUE,
+                'Message' => 'Berhasil menghapus pemeriksaan',
             );
         else:
             $output = array(

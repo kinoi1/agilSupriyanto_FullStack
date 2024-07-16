@@ -37,14 +37,16 @@
                                 <td><?= $i++; ?></td>
                                 <td><?= $a->Antrian; ?></td>
                                 <td><?= $a->nama; ?></td>
-                                <td><?= $a->alamat;?></td>
+                                <td><?= $a->keluhan;?></td>
                                 <td><?= $this->main->pasien_status($a->Status); ?></td>
                                 <?php if($this->session->HakAksesID <> 1):?>
                                 <td>
-                                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#editModal" onclick="edit('<?= $a->PasienID;?>')">
+                                    <button id="editbtn" type="button" data-HakAksesID="<?= $this->session->HakAksesID; ?>" class="btn btn-primary"  data-toggle="modal" data-target="#editModal" onclick="edit('<?= $a->PasienID;?>')">
                                         Edit
                                     </button>
-                                    <a class="btn btn-danger" href="javascript:void(0)" onclick="hapus_data('<?= $a->PasienID; ?>')" >hapus</a>
+                                    <?php if($this->session->HakAksesID == 2):?>
+                                        <a class="btn btn-danger" href="javascript:void(0)" onclick="hapus_data('<?= $a->PasienID; ?>')" >hapus</a>
+                                    <?php endif; ?>
                                 </td>
                                 <?php endif; ?>
                             </tr>

@@ -98,6 +98,15 @@ class Api extends CI_Controller {
         }
     }
 
-
+    public function logout()
+    {
+      $this->session->unset_userdata('username');
+      $this->session->unset_userdata('HakAksesID');
+      $this->session->unset_userdata('UserID');
+      $this->session->unset_userdata('nama');
+      $this->session->unset_userdata('token');
+      $this->session->sess_destroy();
+      redirect('/');
+    }
 
 }
