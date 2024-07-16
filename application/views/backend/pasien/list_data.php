@@ -8,9 +8,11 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Daftar Pasien</h6>
+            <?php if($this->session->HakAksesID <> 2):?>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 Tambah
             </button>
+            <?php endif; ?>
         </div>
         <!-- Button trigger modal -->
 
