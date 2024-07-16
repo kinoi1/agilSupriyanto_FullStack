@@ -40,4 +40,14 @@ class M_main extends CI_Model {
             return '<span class="badge badge-success">Selesai Diperiksa</span>';
         endif;
     }
+
+    public function hak_akses($HakAksesID){
+        if($HakAksesID == 1):
+            return 'Pasien';
+        elseif($HakAksesID == 2):
+            return 'Admin';
+        elseif($HakAksesID == 3):
+            return 'Dokter';
+        endif;
+    }
 }

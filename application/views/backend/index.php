@@ -92,6 +92,30 @@
             </div>
         </div>
     </div>
+    <!-- Button to trigger modal -->
+
+
+<!-- Profile Modal -->
+<div id="profileModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">User Profile</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Name:</strong> <span id="profileName"><?= $this->session->userdata('nama'); ?></span></p>
+        <p><strong>Username:</strong> <span id="profileEmail"><?= $this->session->userdata('username'); ?></span></p>
+        <!-- Add more profile fields as needed -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?= base_url('aset/');?>vendor/jquery/jquery.min.js"></script>
