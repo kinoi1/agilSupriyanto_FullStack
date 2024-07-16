@@ -1,0 +1,18 @@
+List of Endpoint this repository:
+
+POST /api/login
+POST /api/register
+GET  /api/logout
+
+GET  /pasien/list_data
+GET  /pasien/list_pasien
+POST /pasien/save
+POST /pasien/edit
+POST /pasien/update
+POST /pasien/hapus{id}
+
+GET  /admin/list_data
+GET  /admin/index
+
+GET  /dokter/index
+
