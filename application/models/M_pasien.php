@@ -32,4 +32,26 @@ class M_pasien extends CI_Model {
     $query = $this->db->get();
     return $query->result();
  }
+
+ public function get_by_id($id){
+    $this->db->select("
+    b.nama,b.alamat,a.Antrian,
+    a.Status,a.PasienID,a.DokterID,a.keluhan,b.UserID,c.nama as nama_dokter,a.PasienID
+    ");
+    $this->db->from("ps_pasien as a");
+    $this->db->join("ut_user as b","a.UserID = b.UserID","left");
+    $this->db->join("ps_dokter as c","a.DokterID = c.DokterID","left");
+    $this->db->where("a.PasienID",$id);
+    $query = $this->db->get();
+    return $query->row();
+ }
+
+ public function update($id,$data){
+    $this->db->where('PasienID',$id);
+    if($this->db->update('ps_pasien', $data)):
+        return TRUE;
+    else:
+        return FALSE;
+    endif;
+ }
 }

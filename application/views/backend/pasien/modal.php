@@ -3,7 +3,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Pasien</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -51,7 +51,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="editModalLabel">Edit Data Pasien</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -59,6 +59,8 @@
       <div class="modal-body">
         <form id="form-edit">
             <div class="col-md-6 form-group">
+                <input type="hidden" name="PasienID">
+
                 <label for="UserID"> Nama Pengguna</label>                
                 <select class="form-control list_pasien" name="UserID" >
                 </select>

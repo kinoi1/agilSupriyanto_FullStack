@@ -44,6 +44,7 @@
                                     <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#editModal" onclick="edit('<?= $a->PasienID;?>')">
                                         Edit
                                     </button>
+                                    <a class="btn btn-danger" href="javascript:void(0)" onclick="hapus_data('<?= $a->PasienID; ?>')" >hapus</a>
                                 </td>
                                 <?php endif; ?>
                             </tr>

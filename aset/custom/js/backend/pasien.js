@@ -1,6 +1,8 @@
 var host        = window.location.origin +"/";
 var url_list    = host + 'rumahsakit/api/list_pasien';
 var url_simpan  = host + 'rumahsakit/pasien/save';
+var url_update  = host + 'rumahsakit/pasien/update';
+var url_edit    = host + 'rumahsakit/pasien/edit';
 
 
 $(document).ready(function () {
@@ -68,16 +70,32 @@ function getlist() {
     });
 }
 
-function save(){
+function save(element){
+    console.log(element);
+    var category = $(element).data('category');
+    if(category == 'edit'){
+        url = url_update;
+        data = $('#form-edit').serialize()
+    }else{
+        url = url_simpan;
+        data = $('#form').serialize()
+    }
+
     $.ajax({
-        url : url_simpan,
+        url : url,
         type: "POST",
-        data: $('#form').serialize(),
+        data: data,
         dataType: "JSON",
         success: function(data)
         {
             if (data.status) {
-                $('#exampleModal').modal('hide');
+                if(category == 'edit'){
+                    $('#editModal').modal('hide');
+
+                }else{
+                    $('#exampleModal').modal('hide');
+
+                }
                 swal(data.Message,'', "success");
             }else{
                 swal(data.Message,'', "warning");
@@ -127,6 +145,7 @@ function getdata(type){
                 var select = $('.list_dokter');
             }
                 select.empty(); // Clear existing options
+                select.append('<option value="none"> Pilih </option>');
                 $.each(data.data, function(key, value) {
                     select.append('<option value="' + value.UserID + '">' + value.nama + '</option>');
                 });
@@ -141,4 +160,75 @@ function getdata(type){
 
         }
     });
+}
+
+function edit(id){
+    console.log('tes');
+    $.ajax({
+        url : url_edit,
+        type: "POST",
+        data: {PasienID:id},
+        dataType: "JSON",
+        success: function(data)
+        {
+           console.log(data);
+           pasien = data.pasien;
+           console.log(pasien);
+           $('[name="UserID"]').val(pasien.UserID);
+           $('[name="DokterID"]').val(pasien.DokterID);
+           $('[name="keluhan"]').val(pasien.keluhan);
+           $('[name="name"]').val(pasien.nama);
+           $('[name="dokter"]').val(pasien.nama_dokter);
+           $('[name="PasienID"]').val(pasien.PasienID);
+        //    $('#dokter').val(pasien.nama_dokter);
+        //    console.log(pasien.nama_dokter);
+        //    $('#dokter').val('ijfojfo');
+          
+
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            
+            console.log(jqXHR.responseText);
+            console.log(textStatus);
+            console.log(errorThrown);
+
+        }
+    });
+}
+
+function hapus_data(id){
+    swal({
+        title: "Info",
+        text: "Apakah anda yakin akan menghapus data ini ?",
+        // type: "warning",   
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ya",
+        cancelButtonText: "Tidak",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    },
+        function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    url: url_hapus + id + "/nonactive",
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                       
+                        swal("Info", "Transaksi berhasil dibatalkan");
+
+                        
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        swal("Info", "Terjadi kesalahan gagal melakukan transaksi data");
+                        console.log(jqXHR.responseText);
+                    }
+                });
+            } else {
+                swal("Info", "Transaksi tidak jadi");
+            }
+        });
 }
