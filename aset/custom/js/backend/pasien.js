@@ -58,7 +58,7 @@ function getlist() {
         dataType: "JSON",
         success: function(data)
         {
-            console.log(json);
+            // console.log(json);
 
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -141,7 +141,6 @@ function getdata(type){
     }else{
         url = host + 'rumahsakit/main/list_dokter';
     }
-    console.log(url);
     $.ajax({
         url : url,
         type: "POST",

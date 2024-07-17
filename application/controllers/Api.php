@@ -29,6 +29,7 @@ class Api extends CI_Controller {
         $data = array(
             'username' => $this->input->post('username'),
             'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
+            'nama'     => $this->input->post('nama'),
             'HakAksesID' => 1 // pasien
         );
 

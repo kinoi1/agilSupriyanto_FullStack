@@ -5,7 +5,6 @@ var category;
 $(document).ready(function() {
     data = $(".page-data").data();
     category = data.category;
-    console.log(data);
 $("#form-login").submit(function( event ){
     event.preventDefault();
     
@@ -43,7 +42,6 @@ $("#form-login").submit(function( event ){
       dataType: "JSON",
       success: function(data)
       {
-          console.log(data);
           if(data.status) //if success close modal and reload ajax table
           {
           $('#form-login')[0].reset(); // reset form on modals
